@@ -59,8 +59,7 @@ def TED(tree1, tree2):
     for i in range(1, M+1): # M+1 excluded
         dist[i][0]=dist[i-1][0] + CostDelTree(A[i], tree2)
         # Cost of edit operations 1
-        # Cost of deleting Ai
-
+        # Cost of deletingAi
 
     B = getSubTree(tree2)
     for j in range(1, N+1): # N+1 excluded

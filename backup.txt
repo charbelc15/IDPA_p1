@@ -1,0 +1,78 @@
+    new_tree1 = ET.ElementTree()
+    new_tree2 = ET.ElementTree()
+    
+    for child_d1 in root1:
+        new_tree1._setroot(child_d1)
+            #new tree2
+        for child_d2 in root2:
+            new_tree2._setroot(child_d2)
+            return sameTree(root1,root2)
+
+
+
+
+
+
+    #
+
+    #new tree2
+    for child_d2 in root2:
+        new_tree2._setroot(child_d2)
+    #
+
+
+
+    for child_d1 in tree_root2:
+        tree._setroot()
+        for child_d2 in child_d1:
+            tree = ET.ElementTree()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE note [
+<!ELEMENT note (to,from,heading,body)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+]>
+
+
+
+
+
+
+
+
+import xml.dom.minidom
+import xml.etree.ElementTree as ET
+
+def main():
+# use the parse() function to load and parse an XML file
+   tree1_DOM = xml.dom.minidom.parse("test1.xml")
+
+   tree1 = ET.parse('test1.xml')
+  
+# print out the document node and the name of the first child tag
+   print(tree1_DOM.nodeName)
+   print(tree1_DOM.firstChild.tagName)

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf8'?>
+<country name="Liechtenstein">
+        <rank>1</rank>
+        <year>2008</year>
+        <gdppc>141100</gdppc>
+        <neighbor name="Austria" direction="E" />
+        <neighbor name="Switzerland" direction="W" />
+</country>

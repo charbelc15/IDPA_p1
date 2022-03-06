@@ -12,7 +12,7 @@ def CostInsTree(treeA, treeB):
     rootB = treeB.getroot()
         
 
-    if(subTree(rootA,rootB)): #CHECK if B is subtree of A
+    if(subTree(rootA,rootB)): #CHECK if !!!! B !!!! is subtree of !!!! A !!!!
         return 1
     else:
         root=treeB.getroot()

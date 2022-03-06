@@ -14,7 +14,7 @@ from xml.dom.minidom import getDOMImplementation
 
 #Part1 (not done)
 #input:xml files      output: trees
-tree1 = ET.parse('test2.xml') #this gets the file into a tree structure
+tree1 = ET.parse('test1.xml') #this gets the file into a tree structure
 tree2 = ET.parse('test3.xml')
 
 tree_root1 = tree1.getroot() #this gives us the root element of the file
@@ -51,8 +51,15 @@ tree_root2 = tree2.getroot() #this gives us the root element of the file
 
 # get first subtree A of tree 2
 # A = getSubTree(tree2)
-# print(A)
-# for child in A[0]:
+# print(getSubTree(tree2))
+
+# C=ET.ElementTree()
+# C._setroot(A[0])
+# print(getSubTree(C))
+
+# C_root=C.getroot()
+# print(C_root)
+# for child in C_root:
 #     print(child)
 
 
@@ -76,12 +83,10 @@ tree_root2 = tree2.getroot() #this gives us the root element of the file
 # print(not tree_root2)
 
 
+#TED(tree1, tree2)
 
 
-print(TED(tree1, tree2))
-
-
-#print(subTree(tree_root1, tree_root2)) 
+print(subTree(tree_root1, tree_root2)) 
 
 #print(tree_root2)
 #print(preorder(tree_root2))

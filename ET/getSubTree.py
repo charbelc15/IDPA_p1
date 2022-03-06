@@ -11,7 +11,10 @@ def getSubTree(treeA):
     treeA_root = treeA.getroot()
 
     # Looping through all nodes of treeA
-    trees = preorder(treeA_root)
+    for child in treeA_root:
+        trees.append(child)
+
+    #trees = preorder(treeA_root)
     #print(trees)
     return trees
 

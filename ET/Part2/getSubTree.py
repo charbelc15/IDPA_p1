@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-from preorder import preorder
+from Part2.preorder import preorder
 
 def getSubTree(treeA):
     # return inner subtrees (each as a list) in an array of *tree lists*

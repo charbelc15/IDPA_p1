@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
-from CostInsTree import CostInsTree
-from CostDelTree import CostDelTree
-from getSubTree import getSubTree
+from Part2.CostInsTree import CostInsTree
+from Part2.CostDelTree import CostDelTree
+from Part2.getSubTree import getSubTree
 
 global dist
 
@@ -50,7 +50,7 @@ def TED(tree1, tree2):
 
                                                                                         # 3) dist[0][0]
 
-    if(root1==root2):
+    if(root1.tag==root2.tag):
         dist[0][0]=0
     else:
         dist[0][0]=1
@@ -81,7 +81,7 @@ def TED(tree1, tree2):
             treeB=ET.ElementTree()
             treeB._setroot(B[j-1])
             dist[i][j]= min(
-                dist[i-1][j-1] + TED( treeA, treeB ),
+                dist[i-1][j-1] + TED(treeA, treeB),
                 dist[i-1][j] + CostDelTree(treeA, tree2),
                 dist[i][j-1] + CostInsTree(tree1, treeB)
             )

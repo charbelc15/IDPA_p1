@@ -1,10 +1,10 @@
 from logging import root
 import xml.etree.ElementTree as ET
-from sameTree import sameTree
-from subTree import subTree
+from Part2.sameTree import sameTree
+from Part2.subTree import subTree
 
-#cost of inserting tree B(i)
-def CostInsTree(treeA, treeB):
+#cost of deleting tree A(i)
+def CostDelTree(treeA, treeB):
 
     Nb_children=0
 
@@ -12,10 +12,10 @@ def CostInsTree(treeA, treeB):
     rootB = treeB.getroot()
         
 
-    if(subTree(rootA,rootB)): #CHECK if !!!! B !!!! is subtree of !!!! A !!!!
+    if(subTree(rootB,rootA)): #CHECK if !!!! A !!!! is subtree of !!! B !!!!
         return 1
     else:
-        root=treeB.getroot()
+        root=treeA.getroot()
         for child in root.iter():
             Nb_children+=1
         return(Nb_children)

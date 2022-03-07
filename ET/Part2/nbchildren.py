@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
-tree1 = ET.parse('test1.xml') #this gets the file into a tree structure
-tree2 = ET.parse('test2.xml')
+tree1 = ET.parse('xml_files/test1.xml') #this gets the file into a tree structure
+tree2 = ET.parse('xml_files/test1.xml')
 
 
 # Gives total number of elements/subtrees: try it out in xml2tree.py

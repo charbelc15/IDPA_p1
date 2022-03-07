@@ -1,27 +1,89 @@
 import xml.etree.ElementTree as ET
-from CostInsTree import CostInsTree
-
-from Nierman_Jagadish import TED
-from getSubTree import getSubTree
-from preorder import preorder
-from sameTree import sameTree
-from subTree import subTree
-from nbchildren import nbchildren
+from Part2.CostInsTree import CostInsTree
+from Part2.CostDelTree import CostDelTree
+from Part2.Nierman_Jagadish import TED
+from Part1.displayTree import displayTree
+from Part2.getSubTree import getSubTree
+from Part2.preorder import preorder
+from Part2.sameTree import sameTree
+from Part2.subTree import subTree
+from Part2.nbchildren import nbchildren
 
 import xml.dom as dom
 from xml.dom.minidom import getDOMImplementation
+from xml.etree.ElementTree import XMLParser
+from Part1.MaxDepth import MaxDepth
 
 
 #Part1 (not done)
 #input:xml files      output: trees
-tree1 = ET.parse('test1.xml') #this gets the file into a tree structure
-tree2 = ET.parse('test3.xml')
+tree1 = ET.parse('xml_files/test4.xml') #this gets the file into a tree structure
+tree2 = ET.parse('xml_files/test3.xml')
 
 tree_root1 = tree1.getroot() #this gives us the root element of the file
 tree_root2 = tree2.getroot() #this gives us the root element of the file
 
 
+
+#to get tree Depth  # convert from root (to avoid header) to string (byte object) to get depth 
+target = MaxDepth()
+parser = XMLParser(target=target)
+xml_file = ET.tostring(tree_root1, encoding='utf8', method='xml')
+parser.feed(xml_file)
+depth = parser.close #parser.close returns the depth value
+
+
+
+#Display tree
+flagcounter = 0
+for i in tree_root1:
+    flagcounter+=1
+
+flag = [False]*flagcounter
+displayTree(tree_root1,flag,0,False)
+
+
+
+
+
+
+
+
+
+
+
 #testing 
+
+#print(CostDelTree(tree2, tree1)) #deleting 1st param tree from 2nd param tree
+#print(CostInsTree(tree1, tree2)) #inserting 2nd param tree in 1st param tree
+
+
+#print(tree_root1.tag==tree_root2.tag)
+
+#same tree is working (both via sameTree and subTree(using 2 same trees) methods) but subTree is not working (for 2 different trees)
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CHECK IF 2 (test3.xml) is SUBTREE OF 1 (test2.xml)
+# print(not tree_root1)
+# print(not tree_root2)
+
+
+#TED(tree1, tree2)
+
+
+#print(subTree(tree_root1, tree_root2)) 
+
+#print(tree_root2)
+#print(preorder(tree_root2))
+
+#print(CostInsTree(treeA=tree1, treeB=tree2))   
+
+
+
+
+
+
+
+
 
 
 #METHODS
@@ -74,24 +136,6 @@ tree_root2 = tree2.getroot() #this gives us the root element of the file
 
 
 
-#print(tree_root1.tag==tree_root2.tag)
-
-#same tree is working (both via sameTree and subTree(using 2 same trees) methods) but subTree is not working (for 2 different trees)
-
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CHECK IF 2 (test3.xml) is SUBTREE OF 1 (test2.xml)
-# print(not tree_root1)
-# print(not tree_root2)
-
-
-#TED(tree1, tree2)
-
-
-print(subTree(tree_root1, tree_root2)) 
-
-#print(tree_root2)
-#print(preorder(tree_root2))
-
-#print(CostInsTree(treeA=tree1, treeB=tree2))   
 
 
 

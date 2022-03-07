@@ -1,7 +1,7 @@
 from logging import root
 import xml.etree.ElementTree as ET
-from preorder import preorder
-from sameTree import sameTree
+from Part2.preorder import preorder
+from Part2.sameTree import sameTree
 
 # !!!!!!!!!!!!!!! IN THAT ORDER !!!!!!!!!!!!!!!!! checking if     root2        is subtree of      root1
 def subTree(root1, root2) -> bool:

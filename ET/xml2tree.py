@@ -13,35 +13,135 @@ import xml.dom as dom
 from xml.dom.minidom import getDOMImplementation
 from xml.etree.ElementTree import XMLParser
 from Part1.MaxDepth import MaxDepth
+from Part2_Chawathe.Chawathe import Chawathe
+from Part2_Chawathe.getNodesHeights import getNodesHeights
+from ES_Chawathe import backtrace
+import numpy as np
 
 
-#Part1 (not done)
+#Part1 (done)
 #input:xml files      output: trees
-tree1 = ET.parse('xml_files/test4.xml') #this gets the file into a tree structure
-tree2 = ET.parse('xml_files/test3.xml')
+tree1 = ET.parse('xml_files/test6.xml') #this gets the file into a tree structure
+tree2 = ET.parse('xml_files/test5.xml')
 
 tree_root1 = tree1.getroot() #this gives us the root element of the file
 tree_root2 = tree2.getroot() #this gives us the root element of the file
 
+# #Part1 b) Display tree
+# flagcounter = 0
+# for i in tree_root1:
+#     flagcounter+=1
+
+# flag = [False]*flagcounter
+# displayTree(tree_root1,flag,0,False)
 
 
-#to get tree Depth  # convert from root (to avoid header) to string (byte object) to get depth 
-target = MaxDepth()
-parser = XMLParser(target=target)
-xml_file = ET.tostring(tree_root1, encoding='utf8', method='xml')
-parser.feed(xml_file)
-depth = parser.close #parser.close returns the depth value
+#Part2 Chawathe's LD pair using same method as Display tree (cause it has depth + accesses nodes in pre order)
+flagcounter1 = 0
+for i in tree_root1.iter(): # .ITER() !!! TO PASS OVER ALL ELEMENTS not just children
+    flagcounter1+=1
+
+LD_pairA=[]
+flag1 = [False]*flagcounter1
+getNodesHeights(tree_root1,flag1,0,False,LD_pairA) #this function's job is to fill the LD_pair list which is nothing but the tag&depth of each node indexed by pre order traversal 
+print(LD_pairA)
+
+flagcounter2 = 0
+for i in tree_root2.iter():
+    flagcounter2+=1
+
+LD_pairB=[]
+flag2 = [False]*flagcounter2
+getNodesHeights(tree_root2,flag2,0,False,LD_pairB) #this function's job is to fill the LD_pair list which is nothing but the tag&depth of each node indexed by pre order traversal 
+print(LD_pairB)
+
+#Note: chawathe returns at pos 0 : cost matrix for ES(A,B)   at pos1: ED(A,B) value (dist[M][N])
+print(Chawathe(LD_pairA, LD_pairB))
+
+cost_matrix=Chawathe(LD_pairA,LD_pairB)[0]
+
+
+print(backtrace(LD_pairA, LD_pairB, cost_matrix)[0])
+print(backtrace(LD_pairA, LD_pairB, cost_matrix)[1])
+print(LD_pairA) #first
+print(LD_pairB) #second
+print(backtrace(LD_pairA, LD_pairB, cost_matrix)[2]) #new first
+print(backtrace(LD_pairA, LD_pairB, cost_matrix)[3]) #new second
+
+
+#nierman
+#TED(tree1, tree2)
 
 
 
-#Display tree
-flagcounter = 0
-for i in tree_root1:
-    flagcounter+=1
 
-flag = [False]*flagcounter
-displayTree(tree_root1,flag,0,False)
 
+
+
+
+
+
+
+
+
+# B = getSubTree(tree2)
+# treeB=ET.ElementTree()
+# treeB._setroot(B[1]) 
+# treeB_root = treeB.getroot()
+# print(treeB_root)
+# Nb_children=0
+# for child in treeB_root.iter():
+#         Nb_children+=1
+# print(Nb_children)
+# print(subTree(tree_root1,treeB_root)) # SUBTREE !!! subtree is second param
+# print(CostInsTree(tree1,treeB)) # INSERT !!! tree to insert is second param
+# print(CostDelTree(treeB,tree1)) # DELETE !!! tree to delete is first param
+# print(sameTree(treeB_root,tree_root1))
+# print(len(preorder(treeB_root)), " ", len(preorder(tree_root1)))
+# print(preorder(tree_root1))
+
+# Subtree1 = preorder(treeB_root)
+# Subtree2 = preorder(tree_root1)
+# list=[]
+# print(Subtree1)
+# print(Subtree2)
+# for i in range(0, len(Subtree1)-1): #checking if order of all elements is same
+#     if(Subtree1[i].tag == Subtree2[i].tag):
+#             list.append("true")
+# print(list)
+
+
+
+
+
+
+
+
+
+# #to get tree Depth  # convert from root (to avoid header) to string (byte object) to get depth 
+# target = MaxDepth()
+# parser = XMLParser(target=target)
+# xml_file = ET.tostring(tree_root1, encoding='utf8', method='xml')
+# parser.feed(xml_file)
+# depth = parser.close #parser.close returns the depth value
+
+#print(preorder(tree_root1))
+
+#trying list appending 
+# list =[]
+# for i in range(1,10):
+#     list.append(["r.tag",i])
+# print(list)
+
+# parent = [-1, 0, 1, 6, 6, 0, 0, 2, 7]
+# n = len(parent)
+# height = [-1]*(n)
+# res=0 
+# for i in range(n):
+#     res = max(res, getNodesHeights(i, parent, height))
+
+# print(height) 
+# print(res)
 
 
 
@@ -67,7 +167,6 @@ displayTree(tree_root1,flag,0,False)
 # print(not tree_root2)
 
 
-#TED(tree1, tree2)
 
 
 #print(subTree(tree_root1, tree_root2)) 

@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from Part2.CostInsTree import CostInsTree
 from Part2.CostDelTree import CostDelTree
 from Part2.getSubTree import getSubTree
+import numpy as np
 
 global dist
 
@@ -32,21 +33,10 @@ def TED(tree1, tree2):
 
                                                                                     #empty 2D dist matrix
 
-    two_D_array_row_size = int(M+1)         #R(A) + M children 
-    two_D_array_column_size = int(N+1)      #R(B) + N children
-    #Declaring an empty 1D list.
-    dist = [] #global 
-    #Declaring an empty 1D list.
-    b_column = []
-    #Initialize the column to Zeroes.
-    for j in range(0, two_D_array_column_size):
-        b_column.append(0)
-    #Append the column to each row.
-    for i in range(0, two_D_array_row_size):
-        dist.append(b_column)
-    # 2D array is created.
-    #Print the two dimensional list.
-    #print(dist)
+    nb_rows = int(M+1)         #R(A) + M children 
+    nb_cols = int(N+1)      #R(B) + N children
+
+    dist = [[0 for x in range(nb_cols)] for y in range(nb_rows)]  #global 
 
                                                                                         # 3) dist[0][0]
 
@@ -85,5 +75,7 @@ def TED(tree1, tree2):
                 dist[i-1][j] + CostDelTree(treeA, tree2),
                 dist[i][j-1] + CostInsTree(tree1, treeB)
             )
-    print(dist)
+    #just a method for display purposes
+    matrix = np.array(dist)
+    print(matrix)
     return dist[M][N]

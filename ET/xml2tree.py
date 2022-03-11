@@ -15,25 +15,30 @@ from xml.etree.ElementTree import XMLParser
 from Part1.MaxDepth import MaxDepth
 from Part2_Chawathe.Chawathe import Chawathe
 from Part2_Chawathe.getNodesHeights import getNodesHeights
-from ES_Chawathe import backtrace
+from Part2_Chawathe.ES_Chawathe import backtrace
+from Part3.delete import delete
+from Part3.patching import patching
 import numpy as np
 
 
-#Part1 (done)
+                                                                                                        #Part 1.1 XML TO TREE MODEL
 #input:xml files      output: trees
-tree1 = ET.parse('xml_files/test6.xml') #this gets the file into a tree structure
-tree2 = ET.parse('xml_files/test5.xml')
+tree1 = ET.parse('xml_files/test5.xml') #this gets the file into a tree structure
+tree2 = ET.parse('xml_files/test6.xml')
 
 tree_root1 = tree1.getroot() #this gives us the root element of the file
 tree_root2 = tree2.getroot() #this gives us the root element of the file
 
-# #Part1 b) Display tree
+                                                                                                         #Part 1.2 Display tree
 # flagcounter = 0
 # for i in tree_root1:
 #     flagcounter+=1
 
 # flag = [False]*flagcounter
 # displayTree(tree_root1,flag,0,False)
+
+
+                                                                                #PART 2.1 Similarity
 
 
 #Part2 Chawathe's LD pair using same method as Display tree (cause it has depth + accesses nodes in pre order)
@@ -56,21 +61,58 @@ getNodesHeights(tree_root2,flag2,0,False,LD_pairB) #this function's job is to fi
 print(LD_pairB)
 
 #Note: chawathe returns at pos 0 : cost matrix for ES(A,B)   at pos1: ED(A,B) value (dist[M][N])
-print(Chawathe(LD_pairA, LD_pairB))
+val = Chawathe(LD_pairA, LD_pairB)[1]
+Similarity = 1/(val+1)
+print(Similarity)
+
+#nierman
+#val = TED(tree1, tree2)
+#Similarity = 1/(val+1)
+#print(Similarity)
+
+
+
+                                                                                                #PART 2.2     EDIT STRING 
+
 
 cost_matrix=Chawathe(LD_pairA,LD_pairB)[0]
 
 
-print(backtrace(LD_pairA, LD_pairB, cost_matrix)[0])
-print(backtrace(LD_pairA, LD_pairB, cost_matrix)[1])
-print(LD_pairA) #first
-print(LD_pairB) #second
-print(backtrace(LD_pairA, LD_pairB, cost_matrix)[2]) #new first
-print(backtrace(LD_pairA, LD_pairB, cost_matrix)[3]) #new second
+# print(backtrace(LD_pairA, LD_pairB, cost_matrix)[0])
+ES_Chawathe = backtrace(LD_pairA, LD_pairB, cost_matrix)[1]
+print(ES_Chawathe)
+# print(LD_pairA) #first
+# print(LD_pairB) #second
+# print(backtrace(LD_pairA, LD_pairB, cost_matrix)[2]) #new first
+# print(backtrace(LD_pairA, LD_pairB, cost_matrix)[3]) #new second
 
 
-#nierman
-#TED(tree1, tree2)
+
+                                                                                                #PART 3 Patching via Chawathe
+
+patching(ES_Chawathe, tree1)
+
+                                                                                                #PART 4      TREE TO XML
+
+
+#return 2 trees from the 2 xml files
+
+#print(ET.tostring(tree_root1, encoding='utf8').decode('utf8'))
+#print(ET.tostring(tree_root2, encoding='utf8').decode('utf8'))
+
+newXML1 = ET.tostring(tree_root1, encoding='utf8').decode('utf8')
+text_file1 = open("new_Test1.xml", "w")
+n1 = text_file1.write(newXML1)
+text_file1.close()
+
+
+newXML2 = ET.tostring(tree_root2, encoding='utf8').decode('utf8')
+text_file2 = open("new_Test2.xml", "w")
+n2 = text_file2.write(newXML2)
+text_file2.close()
+
+
+
 
 
 
@@ -260,20 +302,4 @@ print(backtrace(LD_pairA, LD_pairB, cost_matrix)[3]) #new second
 
 
 
-#part4 (done)
-#return 2 trees from the 2 xml files
-
-#print(ET.tostring(tree_root1, encoding='utf8').decode('utf8'))
-#print(ET.tostring(tree_root2, encoding='utf8').decode('utf8'))
-
-newXML1 = ET.tostring(tree_root1, encoding='utf8').decode('utf8')
-text_file1 = open("new_Test1.xml", "w")
-n1 = text_file1.write(newXML1)
-text_file1.close()
-
-
-newXML2 = ET.tostring(tree_root2, encoding='utf8').decode('utf8')
-text_file2 = open("new_Test2.xml", "w")
-n2 = text_file2.write(newXML2)
-text_file2.close()
 

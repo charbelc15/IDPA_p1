@@ -16,17 +16,17 @@ def backtrace(first, second, matrix):
         if f[row - 1] == s[col - 1]:
             cost = 0
         else:
-            cost = 2
+            cost = 1 #was 2
 
         r = matrix[row][col]
         a = matrix[row - 1][col]
         b = matrix[row - 1][col - 1]
         c = matrix[row][col - 1]
 
-        if r == b + cost:
+        if b == min(a,b,c):
             # when diagonal backtrace substitution or no substitution
             if(cost != 0):
-                steps.append(["Update:", row-1, col-1])
+                steps.append(["Update:", row-1, col-1,  s[col-1][0]]) #index of node of Tree A (first) to delete + index of node of tree B to insert (in the same position in tree A), + node's tag value (WITHOUT ID)
             trace.append([row - 1, col - 1])
             new_f = [f[row - 1]] + new_f
             new_s = [s[col - 1]] + new_s
@@ -36,8 +36,8 @@ def backtrace(first, second, matrix):
         else:
             # either deletion or insertion, find if minimum is up or left
             # deletion
-            if r == a + 1:
-                steps.append(["Delete:", row-1])
+            if a == min(a,b,c):
+                steps.append(["Delete:", row-1])     #index of node of Tree A (first) to delete
                 trace.append([row - 1, col])
                 #new_f = ["-"] + new_f #deleting node of first tree A (Del(Ai)) from first tree A
                 # new_s = ["-"] + new_s
@@ -46,8 +46,8 @@ def backtrace(first, second, matrix):
 
                 row, col = row - 1, col
             # insertion
-            elif r == c + 1:
-                steps.append(["Insert:", col-1])
+            elif c == min(a,b,c):
+                steps.append(["Insert:", col-1, s[col-1][0]]) #index of node of tree B to insert (in the same position in tree A), + node's tag value (WITHOUT ID)
                 trace.append([row, col - 1])
                 # new_f = ["-"] + new_f
                 new_f = [s[col - 1]] + new_f #inserting node of second tree B (Ins(Bi)) in first tree A

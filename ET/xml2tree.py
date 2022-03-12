@@ -23,19 +23,19 @@ import numpy as np
 
                                                                                                         #Part 1.1 XML TO TREE MODEL
 #input:xml files      output: trees
-tree1 = ET.parse('xml_files/test6.xml') #this gets the file into a tree structure
-tree2 = ET.parse('xml_files/test5.xml')
+tree1 = ET.parse('xml_files/test5.xml') #this gets the file into a tree structure
+tree2 = ET.parse('xml_files/test6.xml')
 
 tree_root1 = tree1.getroot() #this gives us the root element of the file
 tree_root2 = tree2.getroot() #this gives us the root element of the file
 
                                                                                                          #Part 1.2 Display tree
-# flagcounter = 0
-# for i in tree_root1:
-#     flagcounter+=1
+flagcounter = 0
+for i in tree_root1.iter():
+    flagcounter+=1
 
-# flag = [False]*flagcounter
-# displayTree(tree_root1,flag,0,False)
+flag = [False]*flagcounter
+displayTree(tree_root1,flag,0,False)
 
 
                                                                                 #PART 2.1 Similarity
@@ -49,7 +49,7 @@ for i in tree_root1.iter(): # .ITER() !!! TO PASS OVER ALL ELEMENTS not just chi
 LD_pairA=[]
 flag1 = [False]*flagcounter1
 getNodesHeights(tree_root1,flag1,0,False,LD_pairA) #this function's job is to fill the LD_pair list which is nothing but the tag&depth of each node indexed by pre order traversal 
-#print(LD_pairA)
+print(LD_pairA)
 
 flagcounter2 = 0
 for i in tree_root2.iter():
@@ -58,12 +58,12 @@ for i in tree_root2.iter():
 LD_pairB=[]
 flag2 = [False]*flagcounter2
 getNodesHeights(tree_root2,flag2,0,False,LD_pairB) #this function's job is to fill the LD_pair list which is nothing but the tag&depth of each node indexed by pre order traversal 
-#print(LD_pairB)
+print(LD_pairB)
 
 #Note: chawathe returns at pos 0 : cost matrix for ES(A,B)   at pos1: ED(A,B) value (dist[M][N])
 val = Chawathe(LD_pairA, LD_pairB)[1]
 Similarity = 1/(val+1)
-#print(Similarity)
+print(Similarity)
 
 #nierman
 #val = TED(tree1, tree2)

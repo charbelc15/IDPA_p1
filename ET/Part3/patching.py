@@ -60,11 +60,11 @@ def patching(ES, tree):
 # [['Insert:', 7, 'h'], ['Insert:', 6, 'gdppc'], ['Insert:', 5, 'year'], ['Insert:', 4, 'rank']]
 # [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>]
 # [['Insert:', 7, 'h'], ['Insert:', 6, 'gdppc'], ['Insert:', 5, 'year'], ['Insert:', 4, 'rank']]
-# [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>, '-', '-', '-', 'h']
-# [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>, '-', '-', 'gdppc', 'h']
-# [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>, '-', 'year', 'gdppc', 'h']
-# [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>, 'rank', 'year', 'gdppc', 'h']
-# [<Element 'country' at 0x0000023B6C958EF0>, <Element 'rank' at 0x0000023B6C958F40>, <Element 'year' at 0x0000023B6C958FE0>, <Element 'gdppc' at 0x0000023B6C959080>, 'rank', 'year', 'gdppc', 'h']
+# [<Element 'country' at 0x0000021EFFF38F90>, <Element 'rank' at 0x0000021EFFF38FE0>, <Element 'year' at 0x0000021EFFF39080>, <Element 'gdppc' at 0x0000021EFFF39120>]
+# [<Element 'country' at 0x0000021EFFF38F90>, <Element 'rank' at 0x0000021EFFF38FE0>, <Element 'year' at 0x0000021EFFF39080>, <Element 'gdppc' at 0x0000021EFFF39120>, '-', '-', '-', <Element 'h' at 0x0000021EFFF39530>]
+# [<Element 'country' at 0x0000021EFFF38F90>, <Element 'rank' at 0x0000021EFFF38FE0>, <Element 'year' at 0x0000021EFFF39080>, <Element 'gdppc' at 0x0000021EFFF39120>, '-', '-', <Element 'gdppc' at 0x0000021EFFF39490>, <Element 'h' at 0x0000021EFFF39530>]
+# [<Element 'country' at 0x0000021EFFF38F90>, <Element 'rank' at 0x0000021EFFF38FE0>, <Element 'year' at 0x0000021EFFF39080>, <Element 'gdppc' at 0x0000021EFFF39120>, '-', <Element 'year' at 0x0000021EFFF393F0>, <Element 'gdppc' at 0x0000021EFFF39490>, <Element 'h' at 0x0000021EFFF39530>]
+# [<Element 'country' at 0x0000021EFFF38F90>, <Element 'rank' at 0x0000021EFFF38FE0>, <Element 'year' at 0x0000021EFFF39080>, <Element 'gdppc' at 0x0000021EFFF39120>, <Element 'rank' at 0x0000021EFFF39350>, <Element 'year' at 0x0000021EFFF393F0>, <Element 'gdppc' at 0x0000021EFFF39490>, <Element 'h' at 0x0000021EFFF39530>]
 
         elif( ES[i][0] == "Update:" ):
           

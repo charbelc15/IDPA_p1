@@ -1,8 +1,10 @@
 import numpy as np
 
+from Part2.preorder import preorder
+
 
               
-def backtrace(first, second, matrix):
+def backtrace(tree1, tree2, first, second, matrix):
     f = [char for char in first]
     s = [char for char in second]
     new_f, new_s = [], []
@@ -26,7 +28,8 @@ def backtrace(first, second, matrix):
         if b == min(a,b,c):
             # when diagonal backtrace substitution or no substitution
             if(cost != 0):
-                steps.append(["Update:", row-1, col-1,  s[col-1][0]]) #index of node of Tree A (first) to delete + index of node of tree B to insert (in the same position in tree A), + node's tag value (WITHOUT ID)
+                node_to_insert=preorder(tree2.getroot())[col-1]
+                steps.append(["Update:", row-1, col-1, node_to_insert]) #index of node of Tree A (first) to delete + index of node of tree B to insert (in the same position in tree A), + node's tag value (WITHOUT ID)
             trace.append([row - 1, col - 1])
             new_f = [f[row - 1]] + new_f
             new_s = [s[col - 1]] + new_s

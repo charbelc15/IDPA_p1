@@ -1,3 +1,4 @@
+from types import NoneType
 import xml.etree.ElementTree as ET
 from Part2.CostInsTree import CostInsTree
 from Part2.CostDelTree import CostDelTree
@@ -19,6 +20,9 @@ from Part2_Chawathe.ES_Chawathe import backtrace
 from Part3.delete import delete
 from Part3.patching import patching
 import numpy as np
+
+#BUILT ON ELEMENT TREE --> TO BE ABLE TO USE .getparent() IN ES_CHAWATHE/insertion
+from lxml import etree as ET2
 
 
                                                                                                         #Part 1.1 XML TO TREE MODEL
@@ -74,12 +78,18 @@ print(Similarity)
 
                                                                                                 #PART 2.2     EDIT STRING 
 
+                                                                                                #LXML used from here for ES_Chawathe and so forth
+
 
 cost_matrix=Chawathe(LD_pairA,LD_pairB)[0]
 
 
+tree_ET2_1 = ET2.parse('xml_files/test5.xml') #this gets the file into a tree structure
+tree_ET2_2 = ET2.parse('xml_files/test6.xml')
+
+
 # print(backtrace(LD_pairA, LD_pairB, cost_matrix)[0])
-ES_Chawathe = backtrace(tree1, tree2, LD_pairA, LD_pairB, cost_matrix)[1]
+ES_Chawathe = backtrace(tree_ET2_1, tree_ET2_2, LD_pairA, LD_pairB, cost_matrix)[1]
 print(ES_Chawathe)
 # print(LD_pairA) #first
 # print(LD_pairB) #second
@@ -90,9 +100,11 @@ print(ES_Chawathe)
 
                                                                                                 #PART 3 Patching via Chawathe
 
-patching(ES_Chawathe, tree1)
+patching(ES_Chawathe, tree_ET2_1)
 
-print(preorder(tree1.getroot()))
+
+
+
                                                                                                 #PART 4      TREE TO XML
 
 
@@ -101,13 +113,13 @@ print(preorder(tree1.getroot()))
 #print(ET.tostring(tree_root1, encoding='utf8').decode('utf8'))
 #print(ET.tostring(tree_root2, encoding='utf8').decode('utf8'))
 
-newXML1 = ET.tostring(tree1.getroot(), encoding='utf8').decode('utf8')
+newXML1 = ET.tostring(tree_ET2_1.getroot(), encoding='utf8').decode('utf8')
 text_file1 = open("new_Test1.xml", "w")
 n1 = text_file1.write(newXML1)
 text_file1.close()
 
 
-newXML2 = ET.tostring(tree_root2, encoding='utf8').decode('utf8')
+newXML2 = ET.tostring(tree_ET2_2.getroot(), encoding='utf8').decode('utf8')
 text_file2 = open("new_Test2.xml", "w")
 n2 = text_file2.write(newXML2)
 text_file2.close()

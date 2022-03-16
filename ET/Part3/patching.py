@@ -39,22 +39,25 @@ def patching(ES, tree):
           delete(tree.getroot(), node, nested=True)
         
         elif( ES[i][0] == "Insert:" ):
-          node = ES[i][2]
-          node_pos = ES[i][1]
+          node = ES[i][1]
+          node_pos_parent = ES[i][2]
+          parent_node = ES[i][3]
+          parent_pos_traversal = ES[i][4]
 
-          #FOR PRE ORDER PATH
-          if(node_pos > len(tree_preordered)):
-            for i in range(len(tree_preordered),node_pos):  #without this for loop the function .insert will just set it at the end of the list
-              tree_preordered.insert(i,'-')       #will be filled in later steps
-            tree_preordered.insert(node_pos,node)
-          else:
-            tree_preordered[node_pos] = node
-          #print(tree_preordered)
+          # #FOR PRE ORDER PATH
+          # if(node_pos > len(tree_preordered)):
+          #   for i in range(len(tree_preordered),node_pos):  #without this for loop the function .insert will just set it at the end of the list
+          #     tree_preordered.insert(i,'-')       #will be filled in later steps
+          #   tree_preordered.insert(node_pos,node)
+          # else:
+          #   tree_preordered[node_pos] = node
+          # #print(tree_preordered)
 
           #FOR TREE
-          max = len(preorder(tree.getroot()))-1
-          print("MAX",max)
-          insert(tree.getroot(), node, node_pos,0,max)
+          insert(tree.getroot(),node,node_pos_parent,parent_node,parent_pos_traversal,nested=True)
+          # max = len(preorder(tree.getroot()))-1
+          # print("MAX",max)
+          # insert(tree.getroot(), node, node_pos,0,max)
 
 #           #Example
 # [['Insert:', 7, 'h'], ['Insert:', 6, 'gdppc'], ['Insert:', 5, 'year'], ['Insert:', 4, 'rank']]

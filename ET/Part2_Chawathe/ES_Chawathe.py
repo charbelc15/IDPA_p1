@@ -1,6 +1,7 @@
 import numpy as np
 
 from Part2.preorder import preorder
+from Part3.position import position
 
 
               
@@ -51,7 +52,13 @@ def backtrace(tree1, tree2, first, second, matrix):
             # insertion
             elif c == min(a,b,c):
                 node_to_insert=preorder(tree2.getroot())[col-1] #gets the ACTUAL ELEMENT
-                steps.append(["Insert:", col-1, node_to_insert]) #index of node of tree B to insert (in the same position in tree A), + node's tag value (WITHOUT ID)
+                node_to_insert_position_acc_parent = node_to_insert.getparent().index(node_to_insert)
+                node_to_insert_position_acc_traversal = col -1
+                
+                #parent_pos_acc_parent = node_to_insert.getparent().getparent().index(node_to_insert.getparent())
+                parent_pos_acc_traversal = position(tree2.getroot(), node_to_insert.getparent())
+                print("position of the parent wrt traversal", parent_pos_acc_traversal)
+                steps.append(["Insert:" , node_to_insert, node_to_insert_position_acc_parent, node_to_insert.getparent(), parent_pos_acc_traversal ]) # second param: for index according to traversal : col-1     #index of node of tree B according to its parent (in the same position in tree A), + node
                 trace.append([row, col - 1])
                 # new_f = ["-"] + new_f
                 new_f = [s[col - 1]] + new_f #inserting node of second tree B (Ins(Bi)) in first tree A
@@ -63,66 +70,3 @@ def backtrace(tree1, tree2, first, second, matrix):
         if row == 0 or col == 0:
             return trace, steps, new_f, new_s
  
-def word_edit_distance(x, y):
-    rows = len(x) + 1
-    cols = len(y) + 1
-    distance = np.zeros((rows, cols), dtype=int)
-
-    for i in range(1, rows):
-        for k in range(1, cols):
-            distance[i][0] = i
-            distance[0][k] = k
-
-    for col in range(1, cols):
-        for row in range(1, rows):
-            if x[row - 1] == y[col - 1]:
-                cost = 0
-            else:
-                cost = 2
-
-            distance[row][col] = min(distance[row - 1][col] + 1,
-                                     distance[row][col - 1] + 1,
-                                     distance[row - 1][col - 1] + cost)
-
-    print(backtrace(x, y, distance)[0])
-    print(backtrace(x, y, distance)[1])
-    print(backtrace(x, y, distance)[2])
-
-    edit_distance = distance[row][col]
-    return edit_distance, distance
-
-
-# Driver code
-if __name__ == '__main__':
-     
-    # roww = 7
-    # coll = 7
-    # word = 'AACGCA'
-    # word2="GAGCTA"
-    # lst = list(word)
-    # lst2 = list(word2)
-
-
-    # cost = [
-    #         [0,1,2,3,4,5,6],
-    #         [1,2,1,2,3,4,5],
-    #         [2,3,2,3,4,5,4],
-    #         [3,4,3,4,3,4,5],
-    #         [4,3,4,3,4,5,6],
-    #         [5,4,5,4,3,4,5],
-    #         [6,5,4,5,4,5,4]
-        
-    #     ]
-    # result = word_edit_distance("AACGCA", "GAGCTA")
-    # print(result[0])
-    # print(result[1])
-
-    list1=[['country', 0], ['rank', 1], ['year', 2], ['gdppc', 2]]
-    list2=[['country', 0], ['rank', 1], ['year', 2], ['gdppc', 2], ['rank', 1], ['year', 2], ['gdppc', 2], ['h', 2]]
-    cost2 = [
-            [0, 1, 2, 3, 4, 5, 6, 7, 8],
-            [1, 0, 1, 2, 3, 4, 5, 6, 7],
-            [2, 1, 0, 1, 2, 3, 4, 5, 6],
-            [3, 2, 1, 0, 1, 4, 3, 4, 5],
-            [4, 3, 2, 1, 0, 1, 2, 3, 4]]
-    print(backtrace(list1, list2, cost2)[0])

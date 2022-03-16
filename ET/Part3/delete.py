@@ -12,15 +12,13 @@
 # Does Not delete while forward iterating --> Doesnt l break if multiple xml tags are deleted in the same level one-after-another.
 def delete(root, node, nested=False):
     if(root==node):
-        root.tag =None
-        root.text = None
-        root.attrib = {}
+        root.clear()
     for child in reversed(root):
         if nested:
             if len(child) >= 1:
                 delete(child,node)
         if child==node:  
-            root.remove(child)
+            child.clear()
   
 
 
